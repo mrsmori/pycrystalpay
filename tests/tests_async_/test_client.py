@@ -5,11 +5,10 @@ from dotenv import load_dotenv
 
 from pycrystalpay import AsyncCrystalPay
 
-
 load_dotenv()
 
 def test_creation_client():
-    client = AsyncCrystalPay("", "")
+    AsyncCrystalPay("", "")
 
 class TestClient:
     client: AsyncCrystalPay
@@ -41,3 +40,11 @@ class TestClient:
     ])
     async def test_balance_get(self, method: str):
         await self.client.balance_get(method)
+
+    @pytest.mark.asyncio(loop_scope="session")
+    @pytest.mark.parametrize("compact", [
+        False,
+        True
+    ])
+    async def test_method_list(self, compact: bool):
+        await self.client.method_list(compact)

@@ -48,3 +48,11 @@ class TestClient:
     ])
     async def test_method_list(self, compact: bool):
         await self.client.method_list(compact)
+
+    @pytest.mark.asyncio(loop_scope="session")
+    @pytest.mark.parametrize("method", [
+        "BITCOIN",
+        "ETHEREUM"
+    ])
+    async def test_method_get(self, method: str):
+        await self.client.method_get(method)

@@ -1,3 +1,3 @@
 from .me import MeInfo
 from .balance import BalanceList, BalanceGet
-from .method import PAYMENT_METHODS, MethodList
+from .method import PAYMENT_METHODS, MethodList, MethodGet

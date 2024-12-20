@@ -39,3 +39,7 @@ response: types.BalanceGet = await client.balance_list(method="BITCOIN")
 ```python
 response: types.MethodList = await client.method_list(compact=True)
 ```
+[/method/get](https://docs.crystalpay.io/metody-api/method-metody/poluchenie-spiska-metodov)
+```python
+response: types.MethodInfo = await client.method_list(compact=True)
+```

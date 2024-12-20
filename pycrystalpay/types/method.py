@@ -29,7 +29,11 @@ class MethodComData(BaseModel):
     fee: str
     commissions: MethodExtraCommissions
 
-class MethodInfo(BaseModel):
+class MethodGet(BaseModel):
+    """Response of method/get method and element of method/list array
+
+    Doc - https://docs.crystalpay.io/metody-api/method-metody/poluchenie-spiska-metodov
+    """
     name: str
     currency: str
     amount_accuracy: int
@@ -46,4 +50,4 @@ class MethodList(BaseModel):
 
     Doc - https://docs.crystalpay.io/metody-api/method-metody/poluchenie-spiska-metodov
     """
-    items: Dict[str, MethodInfo]
+    items: Dict[str, MethodGet]

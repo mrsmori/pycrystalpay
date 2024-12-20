@@ -28,7 +28,7 @@ payment.id
 
 
 # Можно сразу обновить информацию 
-payment_info: types.InvoiceInfo await payment.refresh()
+payment_info: types.InvoiceInfo = await payment.refresh()
 
 if payment.is_payed is True:
     ...

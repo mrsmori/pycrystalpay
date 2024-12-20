@@ -41,5 +41,9 @@ response: types.MethodList = await client.method_list(compact=True)
 ```
 [/method/get](https://docs.crystalpay.io/metody-api/method-metody/poluchenie-spiska-metodov)
 ```python
-response: types.MethodInfo = await client.method_list(compact=True)
+response: types.MethodInfo = await client.method_get(method="BITCOIN")
+```
+[/method/edit](https://docs.crystalpay.io/metody-api/method-metody/izmenenie-nastroek-metoda)
+```python
+response: bool = await client.method_edit(method="BITCOIN", enabled=True, extra_commission_percent=0)
 ```

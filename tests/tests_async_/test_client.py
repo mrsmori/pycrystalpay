@@ -56,3 +56,22 @@ class TestClient:
     ])
     async def test_method_get(self, method: str):
         await self.client.method_get(method)
+
+    @pytest.mark.asyncio(loop_scope="session")
+    @pytest.mark.parametrize("method, enabled, extra_commission_percent", [
+        ("BITCOIN", False, 10),
+        ("BITCOIN", True, 10),
+        ("BITCOIN", True, 0),
+        ("BITCOIN", None, 10),
+        ("BITCOIN", None, 0),
+        ("BITCOIN", False, None),
+        ("BITCOIN", True, None)
+    ])
+    async def test_method_edit(self, method: str, enabled: bool, extra_commission_percent: int):
+        response = await self.client.method_edit(method, enabled, extra_commission_percent)
+        assert response is True, "edit cause error"
+
+    @pytest.mark.asyncio(loop_scope="session")
+    async def test_method_edit_empty_params(self):
+        with pytest.raises(ValueError):
+            await self.client.method_edit("BITCOIN")

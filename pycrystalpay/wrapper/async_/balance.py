@@ -1,4 +1,5 @@
-from pycrystalpay.types import BalanceGet, BalanceList
+from typing import Union
+from pycrystalpay.types import BalanceGet, BalanceList, PAYMENT_METHODS
 
 from .base import BaseApiWrapper
 
@@ -26,7 +27,7 @@ class Balance(BaseApiWrapper):
         )
         return BalanceList.model_validate(data)
 
-    async def balance_get(self, method: str) -> BalanceGet:
+    async def balance_get(self, method: Union[PAYMENT_METHODS, str]) -> BalanceGet:
         """Getting balances of method
 
         Doc - https://docs.crystalpay.io/metody-api/balance-balansy/poluchenie-balansa

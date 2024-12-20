@@ -1,6 +1,6 @@
 import warnings
 from typing import Union
-from pycrystalpay.types import INVOICE_TYPES, PAYMENT_METHODS, InvoiceInfo
+from pycrystalpay.types import INVOICE_TYPES, PAYMENT_METHODS, InvoiceInfo, InvoiceCreate
 
 from .base import BaseApiWrapper
 
@@ -24,7 +24,7 @@ class Invoice(BaseApiWrapper):
             callback_url: str = None # type: ignore
 
 
-        ) -> 'InvoiceWorker':
+        ) -> InvoiceCreate:
         """Создание платежа
 
         Args:
@@ -56,13 +56,7 @@ class Invoice(BaseApiWrapper):
 
             }
         )
-        return InvoiceWorker(
-            wrapper=self,
-            id_=data.get("id", None),
-            url=data.get("url",  None),
-            type_=data.get("type",  None),
-            rub_amount=data.get("rub_amount", None)
-        )
+        return InvoiceCreate.model_validate(data)
     
     async def invoice_info(self, id_: str) -> InvoiceInfo:
         """Получить информацию о платеже
@@ -78,62 +72,3 @@ class Invoice(BaseApiWrapper):
             }
         )
         return InvoiceInfo.model_validate(data)
-    
-class InvoiceWorker:
-    """Класс для работы с платежом
-    """
-
-    def __init__(self, wrapper: Invoice, id_: str, url: str, type_: INVOICE_TYPES, rub_amount: int):
-        self.__wrapper = wrapper
-        self.__id = id_
-        self.__url = url
-        self.__type = type_
-        self.__rub_amount = rub_amount
-        self.__invoice_data: InvoiceInfo = None #type: ignore
-
-    @property
-    def id(self) -> str:
-        """ID платежа
-        """
-        return self.__id
-    
-    @property
-    def url(self) -> str:
-        """Ссылка для оплаты
-        """
-        return self.__url
-    
-    @property
-    def type(self) -> INVOICE_TYPES:
-        """Тип платежа
-        """
-        return self.__type
-    
-    @property
-    def rub_amount(self) -> int:
-        """Сумма платежа в рублях
-        """
-        return self.__rub_amount
-    
-    @property
-    def info(self) -> InvoiceInfo:
-        """Получение кешированной ифнормации о платеже
-
-        Кешируется ответ от .update_info()
-        """
-        if self.__invoice_data is None:
-            warnings.warn("нет информации о платеже. Используйте .update_info перед её запросом.",UserWarning)
-        return self.__invoice_data
-    
-    @property
-    def is_payed(self) -> bool:
-        data = self.info
-        if data is None:
-            return False
-        return data.state == "payed"
-    
-    async def refresh(self) -> InvoiceInfo:
-        """Обновление информации о платеже
-        """
-        self.__invoice_data = await self.__wrapper.invoice_info(self.id)
-        return self.info

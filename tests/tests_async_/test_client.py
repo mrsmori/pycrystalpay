@@ -86,11 +86,7 @@ class TestClient:
         assert response.id != ""
         assert response.url != ""
         assert response.rub_amount != 0
-
-        updated_info = await response.refresh()
-        assert response.info is updated_info
-        assert response.is_payed is False
-        assert response.info.state == "notpayed"
-
         updated_info_requst = await self.client.invoice_info(response.id)
+
+        assert updated_info_requst.is_payed is False
 

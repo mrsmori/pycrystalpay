@@ -14,6 +14,13 @@ INVOICE_STATES = Literal[
     "unavailable"
 ]
 
+class InvoiceCreate(BaseModel):
+    """Ответ метода invoice/create
+    """    
+    id: str
+    url: str
+    type: str
+    rub_amount: str
 
 class InvoiceInfo(BaseModel):
     """Ответ метода invoice/info
@@ -37,3 +44,7 @@ class InvoiceInfo(BaseModel):
     created_at: Optional[str] = None #type: ignore
     expired_at: Optional[str] = None #type: ignore
     final_at: Optional[str] = None #type: ignore
+
+    @property
+    def is_payed(self) -> bool:
+        return self.state == "payed"

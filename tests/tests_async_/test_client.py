@@ -3,7 +3,7 @@ import pytest
 
 from dotenv import load_dotenv
 
-from pycrystalpay import AsyncCrystalPay
+from pycrystalpay import AsyncCrystalPay, types
 
 load_dotenv()
 
@@ -75,3 +75,22 @@ class TestClient:
     async def test_method_edit_empty_params(self):
         with pytest.raises(ValueError):
             await self.client.method_edit("BITCOIN")
+
+    @pytest.mark.asyncio(loop_scope="session")
+    async def test_create_invoice(self):
+        response = await self.client.invoice_create(
+            "100",
+            "purchase",
+            "1"
+        )
+        assert response.id != ""
+        assert response.url != ""
+        assert response.rub_amount != 0
+
+        updated_info = await response.refresh()
+        assert response.info is updated_info
+        assert response.is_payed is False
+        assert response.info.state == "notpayed"
+
+        updated_info_requst = await self.client.invoice_info(response.id)
+

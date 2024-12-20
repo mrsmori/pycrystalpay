@@ -23,7 +23,7 @@ class Method(BaseApiWrapper):
             }
         )
         return MethodList.model_validate(data)
-    
+   
     async def method_get(self, method: Union[PAYMENT_METHODS, str]) -> MethodGet:
         """Getting information about method
 
@@ -45,20 +45,14 @@ class Method(BaseApiWrapper):
         """
         if enabled is None and extra_commission_percent is None:
             raise ValueError("`enabled` or `extra_commission_percent` must be provided!")
-        
-        body: dict[str, Any] = {
-            "method": method
-        }
-
-        if not enabled is None:
-            body["enabled"] = enabled
-
-        if not extra_commission_percent is None:
-            body["extra_commission_percent"] = extra_commission_percent
 
         data = await self._send_request(
             "POST",
             "method/get/",
-            body
+            {
+                "method": method,
+                "enabled": enabled,
+                "extra_commission_percent": extra_commission_percent
+            }
         )
         return data.get("error", None) is False

@@ -32,7 +32,7 @@ class BaseApiWrapper:
         self.__wait_cooldown = wait_cooldown
     
     async def _cooldown_waiter(self):
-        """Cooldown waiter
+        """Ожидание лимита
 
         About query limits: https://docs.crystalpay.io/#limity-api
         """
@@ -58,7 +58,7 @@ class BaseApiWrapper:
         data: dict[str, Any]=None, #type: ignore
         provide_creds: bool=True
         ) -> dict:
-        """Send api call
+        """Отправка запроса к апи
 
         Args:
             http_method (str): (GET, POST)
@@ -82,10 +82,13 @@ class BaseApiWrapper:
                     "auth_secret": self.__auth_secret
                 }
             )
+        
+        requested_data = {k: v for k, v in request_data.items() if v is not None}
+
         await self._cooldown_waiter()
         response = await self.__client.request(
             http_method,
             self.__api_endpoint + api_route,
-            json=request_data
+            json=requested_data
         )
         return response.json()

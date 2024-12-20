@@ -4,18 +4,15 @@ from .base import BaseApiWrapper
 
 
 class Me(BaseApiWrapper):
-    """Providing `me` methods
+    """Методы `me` 
 
     Doc - https://docs.crystalpay.io/metody-api/me-kassa
     """
 
     async def me_info(self) -> MeInfo:
-        """Getting information about merchant
+        """Поулчить информацию о кассе
 
         Doc - https://docs.crystalpay.io/metody-api/me-kassa/poluchenie-informacii-o-kasse
-        
-        Returns:
-            MeInfo: api parsed response
         """
         data = await self._send_request(
             "POST",

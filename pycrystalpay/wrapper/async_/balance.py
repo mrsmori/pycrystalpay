@@ -5,18 +5,18 @@ from .base import BaseApiWrapper
 
 
 class Balance(BaseApiWrapper):
-    """Providing `balance` methods
+    """Методы `balance`
 
     Doc - https://docs.crystalpay.io/metody-api/balance-balansy
     """
 
     async def balance_list(self, hide_empty: bool=False) -> BalanceList:
-        """Getting balances list
+        """Получить список методов и их балансов
 
         Doc - https://docs.crystalpay.io/metody-api/balance-balansy/poluchenie-spiska-balansov
 
         Args:
-            hide_empty (bool) - hide empy balances
+            hide_empty (bool) - скрыть пустые балансы
         """
         data = await self._send_request(
             "POST",
@@ -28,12 +28,12 @@ class Balance(BaseApiWrapper):
         return BalanceList.model_validate(data)
 
     async def balance_get(self, method: Union[PAYMENT_METHODS, str]) -> BalanceGet:
-        """Getting balances of method
+        """Получить баланс определенного метода
 
         Doc - https://docs.crystalpay.io/metody-api/balance-balansy/poluchenie-balansa
 
         Args:
-            method (bool) - method name
+            method (bool) - название метода
         """
         data = await self._send_request(
             "POST",

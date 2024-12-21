@@ -1,5 +1,5 @@
 from typing import Union, Optional
-from pycrystalpay.types import PAYMENT_METHODS, SUBSTRUCT_FROM, PayoffCreate
+from pycrystalpay.types import PAYMENT_METHODS, SUBSTRUCT_FROM, PayoffCreate, PayoffSubmit
 
 from .base import BaseApiWrapper
 
@@ -22,6 +22,8 @@ class Payoff(BaseApiWrapper):
             callback_url: Optional[str]=None
             ) -> PayoffCreate:
         """Создание вывода
+
+        Doc - https://docs.crystalpay.io/metody-api/payoff-vyvody/sozdanie-vyvoda
 
         Args:
             method (Union[PAYMENT_METHODS, str]): Внутреннее название метода
@@ -51,3 +53,22 @@ class Payoff(BaseApiWrapper):
             sign_values=[str(amount), method, wallet]
         )
         return PayoffCreate.model_validate(data)
+ 
+    async def payoff_submit(self, id_: str) -> PayoffSubmit:
+        """Подтверждение вывода
+
+        Doc - https://docs.crystalpay.io/metody-api/payoff-vyvody/podtverzhdenie-vyvoda
+
+        Args:
+            id (str): ID вывода
+        """
+
+        data = await self._send_request(
+            "POST",
+            "payoff/submit/",
+            {
+                "id": id_,
+            },
+            sign_values=[id_]
+        )
+        return PayoffSubmit.model_validate(data)

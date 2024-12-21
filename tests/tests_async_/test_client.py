@@ -3,7 +3,8 @@ import pytest
 
 from dotenv import load_dotenv
 
-from pycrystalpay import AsyncCrystalPay, types
+from pycrystalpay import AsyncCrystalPay
+
 
 load_dotenv()
 

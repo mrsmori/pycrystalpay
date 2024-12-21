@@ -82,3 +82,18 @@ response: types.PayoffCreate = await client.payoff_create(
         "amount"
 )
 ```
+
+[/payoff/submit](https://docs.crystalpay.io/metody-api/payoff-vyvody/podtverzhdenie-vyvoda)
+```python
+response: types.PayoffData = await client.payoff_create(id="some_id")
+```
+
+[/payoff/cancel](https://docs.crystalpay.io/metody-api/payoff-vyvody/podtverzhdenie-vyvoda)
+```python
+response: types.PayoffData = await client.payoff_cancel(id="some_id")
+```
+
+[/payoff/get](https://docs.crystalpay.io/metody-api/payoff-vyvody/poluchenie-informacii-o-vyvode)
+```python
+response: types.PayoffData = await client.payoff_get(id="some_id")
+```

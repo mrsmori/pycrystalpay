@@ -1,5 +1,5 @@
 from typing import Union, Optional
-from pycrystalpay.types import PAYMENT_METHODS, SUBSTRUCT_FROM, PayoffCreate, PayoffSubmit
+from pycrystalpay.types import PAYMENT_METHODS, SUBSTRUCT_FROM, PayoffCreate, PayoffData
 
 from .base import BaseApiWrapper
 
@@ -54,7 +54,7 @@ class Payoff(BaseApiWrapper):
         )
         return PayoffCreate.model_validate(data)
  
-    async def payoff_submit(self, id_: str) -> PayoffSubmit:
+    async def payoff_submit(self, id_: str) -> PayoffData:
         """Подтверждение вывода
 
         Doc - https://docs.crystalpay.io/metody-api/payoff-vyvody/podtverzhdenie-vyvoda
@@ -71,4 +71,42 @@ class Payoff(BaseApiWrapper):
             },
             sign_values=[id_]
         )
-        return PayoffSubmit.model_validate(data)
+        return PayoffData.model_validate(data)
+
+    async def payoff_cancel(self, id_: str) -> PayoffData:
+        """Отмена вывода
+
+        Doc - https://docs.crystalpay.io/metody-api/payoff-vyvody/otmena-vyvoda
+
+        Args:
+            id (str): ID вывода
+        """
+
+        data = await self._send_request(
+            "POST",
+            "payoff/cancel/",
+            {
+                "id": id_,
+            },
+            sign_values=[id_]
+        )
+        return PayoffData.model_validate(data)
+    
+    async def payoff_get(self, id_: str) -> PayoffData:
+        """Получение информации о выводе
+
+        Doc - https://docs.crystalpay.io/metody-api/payoff-vyvody/poluchenie-informacii-o-vyvode
+
+        Args:
+            id (str): ID вывода
+        """
+
+        data = await self._send_request(
+            "POST",
+            "payoff/cancel/",
+            {
+                "id": id_,
+            }
+        )
+        return PayoffData.model_validate(data)
+

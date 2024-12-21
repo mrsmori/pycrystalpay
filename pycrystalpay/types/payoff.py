@@ -22,7 +22,7 @@ class PayoffCreate(BaseModel):
     commission_amount: str
     wallet: str
 
-class PayoffSubmit(BaseModel):
+class PayoffData(BaseModel):
     """Ответ метода payoff/submit
     """
     id: str

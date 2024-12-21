@@ -101,7 +101,7 @@ response: types.PayoffData = await client.payoff_get(id="some_id")
 ### Методы /ticker/
 [/ticker/list](https://docs.crystalpay.io/metody-api/ticker-kursy-valyut/poluchenie-spiska-valyut)
 ```python
-response: List[str] = await client.payoff_create()
+response: List[str] = await client.ticker_list()
 ```
 
 [/ticker/get](https://docs.crystalpay.io/metody-api/ticker-kursy-valyut/poluchenie-kursa-valyut)

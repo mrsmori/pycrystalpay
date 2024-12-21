@@ -18,6 +18,7 @@ class TestClient:
         cls.client = AsyncCrystalPay(
             os.getenv("MERCHANT_NAME"),
             os.getenv("MERCHANT_TOKEN"),
+            os.getenv("MERCHANT_SALT")
         )
 
     @pytest.mark.asyncio(loop_scope="session")
@@ -90,3 +91,12 @@ class TestClient:
 
         assert updated_info_requst.is_payed is False
 
+    @pytest.mark.skip
+    @pytest.mark.asyncio(loop_scope="session")
+    async def test_create_payoff(self):
+        response = await self.client.payoff_create(
+            "SBPP2P",
+            "somewallet",
+            1,
+            "amount"
+        )

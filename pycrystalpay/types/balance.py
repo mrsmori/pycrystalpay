@@ -1,9 +1,10 @@
 from typing import Dict, List, Optional, Union
+
 from pydantic import BaseModel
 
 
 class BalanceGet(BaseModel):
-    """Response of balance/get method and element of balance/list array
+    """Ответ метода balance/get и элемент списка balance/list
 
     Doc - https://docs.crystalpay.io/metody-api/balance-balansy/poluchenie-balansa
     """
@@ -16,7 +17,7 @@ class BalanceGet(BaseModel):
 
 
 class BalanceList(BaseModel):
-    """Response of balance/list method
+    """Ответ метода balance/list
 
     Doc - https://docs.crystalpay.io/metody-api/balance-balansy/poluchenie-spiska-balansov
     """

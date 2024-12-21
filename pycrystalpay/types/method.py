@@ -30,9 +30,9 @@ class MethodComData(BaseModel):
     commissions: MethodExtraCommissions
 
 class MethodGet(BaseModel):
-    """Response of method/get method and element of method/list array
+    """Ответ метода method/get и элемент списка method/list 
 
-    Doc - https://docs.crystalpay.io/metody-api/method-metody/poluchenie-spiska-metodov
+    Doc - https://docs.crystalpay.io/metody-api/method-metody/poluchenie-metoda
     """
     name: str
     currency: str
@@ -46,7 +46,7 @@ class MethodGet(BaseModel):
 
 
 class MethodList(BaseModel):
-    """Response of method/list method
+    """Ответ метода method/list
 
     Doc - https://docs.crystalpay.io/metody-api/method-metody/poluchenie-spiska-metodov
     """

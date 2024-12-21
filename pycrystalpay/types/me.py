@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class MeInfo(BaseModel):
-    """Response of me/info method
+    """Ответ метода me/info
 
     Doc - https://docs.crystalpay.io/metody-api/me-kassa/poluchenie-informacii-o-kasse
     """

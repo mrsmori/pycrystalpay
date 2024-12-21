@@ -71,3 +71,14 @@ response: types.MethodInfo = await client.method_get(method="BITCOIN")
 ```python
 response: bool = await client.method_edit(method="BITCOIN", enabled=True, extra_commission_percent=0)
 ```
+
+### Методы /payoff/
+[/payoff/create](https://docs.crystalpay.io/metody-api/payoff-vyvody/sozdanie-vyvoda)
+```python
+response: types.PayoffCreate = await client.payoff_create(
+        "SBPP2P",
+        "somewallet",
+        100,
+        "amount"
+)
+```

@@ -47,4 +47,6 @@ class InvoiceInfo(BaseModel):
 
     @property
     def is_payed(self) -> bool:
+        """Оплачен ли платёж
+        """
         return self.state == "payed"

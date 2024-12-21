@@ -10,8 +10,8 @@ class BalanceGet(BaseModel):
     """
     name: str
     currency: str
-    amount_accuracy: int
-    amount: str
+    amount_accuracy: float
+    amount: float
     method: Optional[str] = None # Optional for balance list
 
 

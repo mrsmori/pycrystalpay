@@ -101,3 +101,12 @@ class TestClient:
             1,
             "amount"
         )
+
+    @pytest.mark.asyncio(loop_scope="session")
+    async def test_ticker_list(self):
+        await self.client.ticker_list()
+
+    @pytest.mark.asyncio(loop_scope="session")
+    async def test_ticker_get(self):
+        await self.client.ticker_get(["ETH", "BTC"], "BNB")
+

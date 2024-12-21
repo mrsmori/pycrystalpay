@@ -97,3 +97,14 @@ response: types.PayoffData = await client.payoff_cancel(id="some_id")
 ```python
 response: types.PayoffData = await client.payoff_get(id="some_id")
 ```
+
+### Методы /ticker/
+[/ticker/list](https://docs.crystalpay.io/metody-api/ticker-kursy-valyut/poluchenie-spiska-valyut)
+```python
+response: List[str] = await client.payoff_create()
+```
+
+[/ticker/get](https://docs.crystalpay.io/metody-api/ticker-kursy-valyut/poluchenie-kursa-valyut)
+```python
+response: types.TickerGet =  await self.client.ticker_get(["ETH", "BTC"], "BNB")
+```

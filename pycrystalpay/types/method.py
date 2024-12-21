@@ -36,7 +36,7 @@ class MethodGet(BaseModel):
     """
     name: str
     currency: str
-    amount_accuracy: int
+    amount_accuracy: float
     minimal_status_level: int
     settings: MethodSettings
     in_: Optional[MethodComData] = Field(default_factory=lambda d: d.get("in", None))

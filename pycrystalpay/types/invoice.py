@@ -20,7 +20,7 @@ class InvoiceCreate(BaseModel):
     id: str
     url: str
     type: str
-    rub_amount: str
+    rub_amount: float
 
 class InvoiceInfo(BaseModel):
     """Ответ метода invoice/info

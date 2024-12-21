@@ -10,7 +10,7 @@ class Me(BaseApiWrapper):
     """
 
     async def me_info(self) -> MeInfo:
-        """Поулчить информацию о кассе
+        """Получить информацию о кассе
 
         Doc - https://docs.crystalpay.io/metody-api/me-kassa/poluchenie-informacii-o-kasse
         """
